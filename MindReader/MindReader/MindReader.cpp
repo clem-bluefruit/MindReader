@@ -31,3 +31,10 @@ void MindReader::PlusCell(int cell)
 	value++;
 	m_tape[cell] = value;
 }
+
+void MindReader::MinusCell(int cell)
+{
+	unsigned int value = ViewCell(cell);
+	value--;
+	m_tape[cell] = value;
+}

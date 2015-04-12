@@ -12,6 +12,7 @@ public:
 	void AddCell();
 	char ViewCell(int) const;
 	void PlusCell(int);
+	void MinusCell(int);
 private:
 	std::vector<char> m_tape;
 };
