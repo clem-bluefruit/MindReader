@@ -18,7 +18,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="tests.simple.mindreader.cpp">
+    <ClCompile Include="mindreader.simple.tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
