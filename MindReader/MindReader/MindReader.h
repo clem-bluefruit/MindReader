@@ -10,9 +10,10 @@ public:
 	~MindReader();
 	unsigned int GetSize() const;
 	void AddCell();
-	char ViewCell(int) const;
-	void PlusCell(int);
-	void MinusCell(int);
+	void AddCell(unsigned int numCells);
+	char ViewCell(int cellID) const;
+	void PlusCell(int cellID);
+	void MinusCell(int cellID);
 private:
 	std::vector<char> m_tape;
 };

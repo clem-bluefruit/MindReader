@@ -20,21 +20,27 @@ void MindReader::AddCell()
 	m_tape.push_back(0);
 }
 
-char MindReader::ViewCell(int cell = 0) const
+void MindReader::AddCell(unsigned int numCells)
 {
-	return m_tape.at(cell);
+	for (int i = 0; i < numCells; ++i)
+		AddCell();
 }
 
-void MindReader::PlusCell(int cell)
+char MindReader::ViewCell(int cellID = 0) const
 {
-	unsigned int value = ViewCell(cell);
+	return m_tape.at(cellID);
+}
+
+void MindReader::PlusCell(int cellID)
+{
+	unsigned int value = ViewCell(cellID);
 	value++;
-	m_tape[cell] = value;
+	m_tape[cellID] = value;
 }
 
-void MindReader::MinusCell(int cell)
+void MindReader::MinusCell(int cellID)
 {
-	unsigned int value = ViewCell(cell);
+	unsigned int value = ViewCell(cellID);
 	value--;
-	m_tape[cell] = value;
+	m_tape[cellID] = value;
 }

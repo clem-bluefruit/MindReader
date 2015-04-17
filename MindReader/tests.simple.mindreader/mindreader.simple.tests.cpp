@@ -20,8 +20,7 @@ TEST(MindReader, Adding_a_cell_to_tape_returns_size_1_null_value)
 TEST(MindReader, Adding_2_cells_increment_values_2_each)
 {
 	MindReader tape;
-	tape.AddCell();
-	tape.AddCell();
+	tape.AddCell(2);
 	for (int i = 0; i < 2; ++i)
 	{
 		tape.PlusCell(0);
@@ -35,8 +34,7 @@ TEST(MindReader, Adding_2_cells_increment_values_2_each)
 TEST(MindReader, Adding_2_cells_increment_2_each_decrement_2_each_gives_2_null_cells)
 {
 	MindReader tape;
-	tape.AddCell();
-	tape.AddCell();
+	tape.AddCell(2);
 	for (int i = 0; i < 2; ++i)
 	{
 		tape.PlusCell(0);
@@ -52,3 +50,9 @@ TEST(MindReader, Adding_2_cells_increment_2_each_decrement_2_each_gives_2_null_c
 	ASSERT_EQ(NULL, tape.ViewCell(1)) << "Cell 1 is NOT null";
 }
 
+TEST(MindReader, Automate_adding_cells_to_tape_adding_5_cells_returns_size_5)
+{
+	MindReader tape;
+	tape.AddCell(5);
+	ASSERT_EQ(5, tape.GetSize()) << "Tape does NOT have 5 cells";
+}
