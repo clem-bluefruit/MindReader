@@ -1,8 +1,15 @@
 #include "MindReader.h"
 using namespace ::std;
 
-MindReader::MindReader() :
-	m_tape(0)
+MindReader::MindReader()
+	: m_tape(0),
+	  m_bfCode("")
+{
+}
+
+MindReader::MindReader(string code)
+	: m_tape(0),
+	m_bfCode(code)
 {
 }
 
@@ -20,10 +27,11 @@ void MindReader::AddCell()
 	m_tape.push_back(0);
 }
 
-void MindReader::AddCell(unsigned int numCells)
+void MindReader::IncrementCell(int cellID)
 {
-	for (int i = 0; i < numCells; ++i)
-		AddCell();
+	int cellvalue = ViewCell(cellID);
+	cellvalue++;
+	m_tape.at(cellID) = cellvalue;
 }
 
 char MindReader::ViewCell(int cellID = 0) const
@@ -31,16 +39,22 @@ char MindReader::ViewCell(int cellID = 0) const
 	return m_tape.at(cellID);
 }
 
-void MindReader::PlusCell(int cellID)
+void MindReader::InputCode(string bfCode)
 {
-	unsigned int value = ViewCell(cellID);
-	value++;
-	m_tape[cellID] = value;
+	m_bfCode = bfCode;
 }
 
-void MindReader::MinusCell(int cellID)
+string MindReader::ViewCode() const
 {
-	unsigned int value = ViewCell(cellID);
-	value--;
-	m_tape[cellID] = value;
+	return m_bfCode;
+}
+
+string MindReader::OutputString() const
+{
+	string appendChars;
+	for (char c : m_tape)
+	{
+		appendChars += c;
+	}
+	return appendChars;
 }

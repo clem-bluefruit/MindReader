@@ -1,58 +1,44 @@
 #include <gtest\gtest.h>
 #include <MindReader.h>
-
+#include <string>
 using namespace ::testing;
 
-TEST(MindReader, Initialised_tape_returns_empty_cell)
+TEST(MindReader, Initialise_empty_tape)
 {
 	MindReader tape;
-	ASSERT_EQ(0, tape.GetSize()) << "Size is NOT 0";
+	ASSERT_EQ(0, tape.GetSize()) << "Tape is NOT empty";
 }
 
-TEST(MindReader, Adding_a_cell_to_tape_returns_size_1_null_value)
+TEST(MindReader, Adding_cells_to_tape)
 {
 	MindReader tape;
-	tape.AddCell();
-	ASSERT_EQ(1, tape.GetSize()) << "Size is NOT 1";
-	ASSERT_EQ(NULL, tape.ViewCell(0)) << "Initialised cell is NOT null";
-}
-
-TEST(MindReader, Adding_2_cells_increment_values_2_each)
-{
-	MindReader tape;
-	tape.AddCell(2);
-	for (int i = 0; i < 2; ++i)
+	for (int i = 0; i < 5; ++i)
 	{
-		tape.PlusCell(0);
-		tape.PlusCell(1);
+		tape.AddCell();
 	}
-	ASSERT_EQ(2, tape.GetSize()) << "Size is NOT 2";
-	ASSERT_EQ(2, tape.ViewCell(0)) << "Cell value of 0 is NOT 2";
-	ASSERT_EQ(2, tape.ViewCell(1)) << "Cell value of 1 is NOT 2";
+	ASSERT_EQ(5, tape.GetSize()) << "Tape is NOT 5 cells";
 }
 
-TEST(MindReader, Adding_2_cells_increment_2_each_decrement_2_each_gives_2_null_cells)
+TEST(MindReader, Add_input_string_to_MindReader)
 {
 	MindReader tape;
-	tape.AddCell(2);
-	for (int i = 0; i < 2; ++i)
-	{
-		tape.PlusCell(0);
-		tape.PlusCell(1);
-	}
-	for (int i = 1; i >= 0; --i)
-	{
-		tape.MinusCell(0);
-		tape.MinusCell(1);
-	}
-	ASSERT_EQ(2, tape.GetSize()) << "Size is NOT 2";
-	ASSERT_EQ(NULL, tape.ViewCell(0)) << "Cell 0 is NOT null";
-	ASSERT_EQ(NULL, tape.ViewCell(1)) << "Cell 1 is NOT null";
+	std::string bfCode = "+";
+	tape.InputCode(bfCode);
+	ASSERT_EQ(bfCode, tape.ViewCode()) << "Input code does NOT match";
 }
 
-TEST(MindReader, Automate_adding_cells_to_tape_adding_5_cells_returns_size_5)
+TEST(MindReader, Initialise_MindReader_with_input_string)
 {
-	MindReader tape;
-	tape.AddCell(5);
-	ASSERT_EQ(5, tape.GetSize()) << "Tape does NOT have 5 cells";
+	std::string bfCode = "+";
+	MindReader tape(bfCode);
+	ASSERT_EQ(bfCode, tape.ViewCode()) << "Input code does NOT match initialised value";
+}
+
+TEST(MindReader, Initialised_value_is_overwritten)
+{
+	std::string bfCode = "+";
+	std::string expected = "-";
+	MindReader tape(bfCode);
+	tape.InputCode(expected);
+	ASSERT_EQ(expected, tape.ViewCode()) << "Code string is NOT -";
 }

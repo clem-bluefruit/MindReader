@@ -7,7 +7,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MindReader", "MindReader\Mi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gtest", "gtest\gtest.vcxproj", "{236683DC-ED05-4E6D-90A8-1A67EC0DDB3C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tests.simple.mindreader", "tests.simple.mindreader\tests.simple.mindreader.vcxproj", "{25D257C1-977D-4CC1-A85C-E830FE0E4BD6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mindreader.simple.tests", "tests.simple.mindreader\tests.simple.mindreader.vcxproj", "{25D257C1-977D-4CC1-A85C-E830FE0E4BD6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParserALU", "ALU\ALU.vcxproj", "{DEC7696F-DC8F-4F29-BAAD-3F6977862CB7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "parserAlu.simple.tests", "parserAlu.simple.tests\parserAlu.simple.tests.vcxproj", "{3D1F1975-398B-4228-9AE1-FBD894DF1822}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{25D257C1-977D-4CC1-A85C-E830FE0E4BD6}.Debug|Win32.Build.0 = Debug|Win32
 		{25D257C1-977D-4CC1-A85C-E830FE0E4BD6}.Release|Win32.ActiveCfg = Release|Win32
 		{25D257C1-977D-4CC1-A85C-E830FE0E4BD6}.Release|Win32.Build.0 = Release|Win32
+		{DEC7696F-DC8F-4F29-BAAD-3F6977862CB7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DEC7696F-DC8F-4F29-BAAD-3F6977862CB7}.Debug|Win32.Build.0 = Debug|Win32
+		{DEC7696F-DC8F-4F29-BAAD-3F6977862CB7}.Release|Win32.ActiveCfg = Release|Win32
+		{DEC7696F-DC8F-4F29-BAAD-3F6977862CB7}.Release|Win32.Build.0 = Release|Win32
+		{3D1F1975-398B-4228-9AE1-FBD894DF1822}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3D1F1975-398B-4228-9AE1-FBD894DF1822}.Debug|Win32.Build.0 = Debug|Win32
+		{3D1F1975-398B-4228-9AE1-FBD894DF1822}.Release|Win32.ActiveCfg = Release|Win32
+		{3D1F1975-398B-4228-9AE1-FBD894DF1822}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
