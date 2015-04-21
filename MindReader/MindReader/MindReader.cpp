@@ -34,6 +34,13 @@ void MindReader::IncrementCell(int cellID)
 	m_tape.at(cellID) = cellvalue;
 }
 
+void MindReader::DecrementCell(int cellID)
+{
+	int cellvalue = ViewCell(cellID);
+	cellvalue--;
+	m_tape.at(cellID) = cellvalue;
+}
+
 char MindReader::ViewCell(int cellID = 0) const
 {
 	return m_tape.at(cellID);

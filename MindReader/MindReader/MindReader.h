@@ -12,6 +12,7 @@ public:
 	unsigned int GetSize() const;
 	void AddCell();
 	void IncrementCell(int cellID);
+	void DecrementCell(int cellID);
 	char ViewCell(int cellID) const;
 	void InputCode(std::string code);
 	std::string ViewCode() const;
