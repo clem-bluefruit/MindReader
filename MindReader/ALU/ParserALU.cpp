@@ -61,15 +61,12 @@ string ParserALU::ParseString(const string codeString, int cell = 0)
 			tapeString += m_tape.ViewCell(cellPointer);
 			break;
 		case '[':
-			loopTimes = m_tape.ViewCell(cellPointer);
+			loopTimes = (m_tape.ViewCell(cellPointer) - 1);
 			loopPoint = cellPointer;
 			break;
 		case ']':
-			return to_string(loopPoint);
-			for (int i = 0; i < loopTimes; ++i)
-				ParseString(loop[1], loopPoint);
-			
-			//return loop[1];
+			for (int loops = 0; loops < loopTimes; ++loops)
+				tapeString += ParseString(loop[1], loopPoint);
 			break;
 		default:
 			break;
