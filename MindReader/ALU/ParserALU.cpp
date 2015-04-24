@@ -1,7 +1,5 @@
 #include "ParserALU.h"
 #include <string>
-#include <regex>
-#include <iostream>
 
 using namespace ::std;
 
@@ -22,25 +20,22 @@ string ParserALU::ParseString()
 	return ParseString(m_tape.ViewCode(),0);
 }
 
-string ParserALU::ParseString(const string codeString, int cell = 0)
+string ParserALU::ParseString(const string &codeString, int cell = 0)
 {
 	if (m_tape.GetSize() == 0)
 		m_tape.AddCell();
 	unsigned int cellPointer = cell;
 	
 	string tapeString = "";
+	string loopCode = "";
 
-	regex match("\\[([^\\]*)]", regex_constants::extended);
-	smatch loop;
-	regex_search(codeString, loop, match);
-	
-	//return to_string(loop.size());
-
-	int loopTimes = 0;
 	int i = 0;
-	int loopPoint = 0;
+	int loopFrom = 0;
+	int loopTo = 0;
+	int loopLength = 0;
+	int loopTimes = 0;
 
-	for (const auto c : codeString)
+	for (const auto &c : codeString)
 	{
 		switch (c)
 		{
@@ -61,18 +56,22 @@ string ParserALU::ParseString(const string codeString, int cell = 0)
 			tapeString += m_tape.ViewCell(cellPointer);
 			break;
 		case '[':
+			loopFrom = (i + 1);
 			loopTimes = (m_tape.ViewCell(cellPointer) - 1);
-			loopPoint = cellPointer;
 			break;
 		case ']':
-			for (int loops = 0; loops < loopTimes; ++loops)
-				tapeString += ParseString(loop[1], loopPoint);
+			loopTo = i;
+			loopLength = (loopTo - loopFrom);
+			loopCode = codeString.substr(loopFrom, loopLength);
+			for (int loopNum = 0; loopNum < loopTimes; ++loopNum)
+			{
+				tapeString += ParseString(loopCode, cellPointer);
+			}
 			break;
 		default:
 			break;
 		}
-		++i;
+		i++;
 	}
-	//return codeString;
 	return tapeString;
 }

@@ -63,5 +63,15 @@ TEST(ParserALU, Code_input_contains_loop_points_totals_97_returns_a)
 
 	MindReader tape(inputString);
 	ParserALU alu(tape);
-	ASSERT_EQ("a", alu.ParseString()) << "Output is NOT a";
+	ASSERT_EQ(expected, alu.ParseString()) << "Output is NOT a";
+}
+
+TEST(ParserALU, Code_input_contains_loop_points_returns_brainfuck)
+{
+	std::string inputString = "++++[>+++++<-]>[>+++++>++++++>+++++>+++++>+++++>+++++>++++++>+++++>+++++<<<<<<<<<-]>--.>------.>---.>+++++.>++++++++++.>++.>---.>-.>+++++++.";
+	std::string expected = "brainfuck";
+
+	MindReader tape(inputString);
+	ParserALU alu(tape);
+	ASSERT_EQ(expected, alu.ParseString()) << "Output is NOT brainfuck";
 }

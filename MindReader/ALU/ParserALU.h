@@ -9,7 +9,7 @@ public:
 	~ParserALU();
 	int CodeLength();
 	std::string ParseString();
-	std::string ParseString(const std::string codeString, int cell);
+	std::string ParseString(const std::string &codeString, int cell);
 private:
 	MindReader &m_tape;
 };
