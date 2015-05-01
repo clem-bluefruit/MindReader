@@ -4,23 +4,26 @@
 using namespace ::std;
 
 ParserALU::ParserALU(MindReader &tape)
-	: m_tape(tape)
+	: m_tape(tape),
+	  m_loopFrom(0),
+	  m_loopTo(0),
+	  m_loopTimes(0)
 {}
 
 ParserALU::~ParserALU()
 {}
 
-int ParserALU::CodeLength()
+const unsigned int ParserALU::CodeLength() const
 {
 	return m_tape.ViewCode().length();
 }
 
 string ParserALU::ParseString()
 {
-	return ParseString(m_tape.ViewCode(),0);
+	return ParseString(m_tape.ViewCode(), 0);
 }
 
-string ParserALU::ParseString(const string &codeString, int cell = 0)
+string ParserALU::ParseString(const string &codeString, unsigned int cell = 0)
 {
 	if (m_tape.GetSize() == 0)
 		m_tape.AddCell();
@@ -30,10 +33,7 @@ string ParserALU::ParseString(const string &codeString, int cell = 0)
 	string loopCode = "";
 
 	int i = 0;
-	int loopFrom = 0;
-	int loopTo = 0;
 	int loopLength = 0;
-	int loopTimes = 0;
 
 	for (const auto &c : codeString)
 	{
@@ -56,17 +56,14 @@ string ParserALU::ParseString(const string &codeString, int cell = 0)
 			tapeString += m_tape.ViewCell(cellPointer);
 			break;
 		case '[':
-			loopFrom = (i + 1);
-			loopTimes = (m_tape.ViewCell(cellPointer) - 1);
+			AddStartPoint(i + 1);
+			m_loopTimes.push_back(m_tape.ViewCell(cellPointer) - 1);
 			break;
 		case ']':
-			loopTo = i;
-			loopLength = (loopTo - loopFrom);
-			loopCode = codeString.substr(loopFrom, loopLength);
-			for (int loopNum = 0; loopNum < loopTimes; ++loopNum)
-			{
-				tapeString += ParseString(loopCode, cellPointer);
-			}
+			AddEndPoint(i);
+			loopLength = (CurrentEndPoint() - CurrentStartPoint());
+			loopCode = codeString.substr(CurrentStartPoint(), loopLength);
+			tapeString += ProcessLoop(loopCode, cellPointer);
 			break;
 		default:
 			break;
@@ -74,4 +71,43 @@ string ParserALU::ParseString(const string &codeString, int cell = 0)
 		i++;
 	}
 	return tapeString;
+}
+
+void ParserALU::AddStartPoint(const unsigned int start)
+{
+	m_loopFrom.push_back(start);
+}
+
+void ParserALU::AddEndPoint(const unsigned int end)
+{
+	m_loopTo.push_back(end);
+}
+
+const unsigned int ParserALU::CurrentStartPoint() const
+{
+	return m_loopFrom.back();
+}
+
+const unsigned int ParserALU::CurrentEndPoint() const
+{
+	return m_loopTo.back();
+}
+
+void ParserALU::CleanLoopPoints()
+{
+	m_loopFrom.pop_back();
+	m_loopTo.pop_back();
+	m_loopTimes.pop_back();
+}
+
+string ParserALU::ProcessLoop(const std::string &codeLoop, const unsigned int cell)
+{
+	string toTape = "";
+	const int loopTimes = m_loopTimes.back();
+	for (int i = 0; i < loopTimes; ++i)
+	{
+		toTape += ParseString(codeLoop, cell);
+	}
+	CleanLoopPoints();
+	return toTape;
 }

@@ -1,4 +1,4 @@
-﻿Build started 21/04/2015 18:49:46.
+﻿Build started 26/04/2015 22:28:06.
      1>Project "C:\Users\Simon\Documents\Repo\MindReader\MindReader\tests.simple.mindreader\tests.simple.mindreader.vcxproj" on node 3 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(388,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (tests.simple.mindreader.vcxproj, tests.simple.mindreader.tests.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
@@ -13,4 +13,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.17
+Time Elapsed 00:00:01.36

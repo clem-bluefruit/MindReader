@@ -18,7 +18,7 @@ public:
 	std::string ViewCode() const;
 	std::string OutputString() const;
 private:
-	std::vector<char> m_tape;
+	std::vector<unsigned char> m_tape;
 	std::string m_bfCode;
 };
 
