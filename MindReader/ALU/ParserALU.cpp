@@ -1,13 +1,16 @@
 #include "ParserALU.h"
 #include <string>
 
+#include <iostream>
+
 using namespace ::std;
 
 ParserALU::ParserALU(MindReader &tape)
 	: m_tape(tape),
 	  m_loopFrom(0),
 	  m_loopTo(0),
-	  m_loopTimes(0)
+	  m_loopTimes(0),
+	  m_operations(0)
 {}
 
 ParserALU::~ParserALU()
@@ -53,24 +56,36 @@ string ParserALU::ParseString(const string &codeString, unsigned int cell = 0)
 			cellPointer--;
 			break;
 		case '.':
-			tapeString += m_tape.ViewCell(cellPointer);
+			tapeString += ViewTapeCell(cellPointer);
 			break;
 		case '[':
 			AddStartPoint(i + 1);
-			m_loopTimes.push_back(m_tape.ViewCell(cellPointer) - 1);
+			m_loopTimes.push_back(ViewTapeCell(cellPointer) - 1);
+
 			break;
 		case ']':
 			AddEndPoint(i);
 			loopLength = (CurrentEndPoint() - CurrentStartPoint());
 			loopCode = codeString.substr(CurrentStartPoint(), loopLength);
-			tapeString += ProcessLoop(loopCode, cellPointer);
+			tapeString += ParseLoop(loopCode, cellPointer);
 			break;
 		default:
 			break;
 		}
 		i++;
+		AddOp();
 	}
 	return tapeString;
+}
+
+unsigned int ParserALU::NumOperations() const
+{
+	return m_operations;
+}
+
+void ParserALU::AddOp()
+{
+	m_operations = m_operations + 1;
 }
 
 void ParserALU::AddStartPoint(const unsigned int start)
@@ -93,6 +108,11 @@ const unsigned int ParserALU::CurrentEndPoint() const
 	return m_loopTo.back();
 }
 
+const unsigned int ParserALU::CurrentLoopTimes() const
+{
+	return m_loopTimes.back();
+}
+
 void ParserALU::CleanLoopPoints()
 {
 	m_loopFrom.pop_back();
@@ -100,14 +120,18 @@ void ParserALU::CleanLoopPoints()
 	m_loopTimes.pop_back();
 }
 
-string ParserALU::ProcessLoop(const std::string &codeLoop, const unsigned int cell)
+string ParserALU::ParseLoop(const std::string &codeLoop, const unsigned int cell)
 {
 	string toTape = "";
-	const int loopTimes = m_loopTimes.back();
-	for (int i = 0; i < loopTimes; ++i)
+	for (int i = 0; i < CurrentLoopTimes(); ++i)
 	{
 		toTape += ParseString(codeLoop, cell);
 	}
 	CleanLoopPoints();
 	return toTape;
+}
+
+const unsigned char ParserALU::ViewTapeCell(const unsigned int cell)
+{
+	return m_tape.ViewCell(cell);
 }

@@ -21,9 +21,3 @@ private:
 	std::vector<unsigned char> m_tape;
 	std::string m_bfCode;
 };
-
-/*
-	Parser
-	ALU
-*/
-

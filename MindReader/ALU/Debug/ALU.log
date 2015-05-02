@@ -1,8 +1,9 @@
-﻿Build started 01/05/2015 22:30:53.
+﻿Build started 02/05/2015 01:28:08.
      1>Project "C:\Users\Simon\Documents\Repo\MindReader\MindReader\ALU\ALU.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ParserALU.cpp
          ParserALU.cpp
+     1>c:\users\simon\documents\repo\mindreader\mindreader\alu\parseralu.cpp(126): warning C4018: '<' : signed/unsigned mismatch
        Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\Simon\Documents\Repo\MindReader\MindReader\Debug\ParserALU.lib" /NOLOGO Debug\ParserALU.obj
          ALU.vcxproj -> C:\Users\Simon\Documents\Repo\MindReader\MindReader\Debug\ParserALU.lib
@@ -10,4 +11,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.89
+Time Elapsed 00:00:00.64
