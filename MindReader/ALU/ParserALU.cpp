@@ -1,7 +1,6 @@
 #include "ParserALU.h"
 #include <string>
-
-#include <iostream>
+#include <sstream>
 
 using namespace ::std;
 
@@ -10,8 +9,11 @@ ParserALU::ParserALU(MindReader &tape)
 	  m_loopFrom(0),
 	  m_loopTo(0),
 	  m_loopTimes(0),
-	  m_operations(0)
-{}
+	  m_operations(0),
+	  m_timesLooped(0)
+{
+	m_bufferOutput.clear();
+}
 
 ParserALU::~ParserALU()
 {}
@@ -59,11 +61,9 @@ string ParserALU::ParseString(const string &codeString, unsigned int cell = 0)
 			tapeString += ViewTapeCell(cellPointer);
 			break;
 		case '[':
+			++m_timesLooped;
 			AddStartPoint(i + 1);
-			if (m_loopTimes.size() > 1)
-				m_loopTimes.push_back(ViewTapeCell(cellPointer));
-			else
-				m_loopTimes.push_back(ViewTapeCell(cellPointer) - 1);
+			m_loopTimes.push_back(ViewTapeCell(cellPointer) - 1);
 			break;
 		case ']':
 			AddEndPoint(i);
@@ -125,7 +125,10 @@ void ParserALU::CleanLoopPoints()
 string ParserALU::ParseLoop(const std::string &codeLoop, const unsigned int cell)
 {
 	string toTape = "";
-	for (int i = 0; i < CurrentLoopTimes(); ++i)
+	unsigned int loops = 0;
+	m_bufferOutput << "Code:: " << codeLoop << endl;
+	loops = CurrentLoopTimes();
+	for (int i = 0; i < loops; ++i)
 	{
 		toTape += ParseString(codeLoop, cell);
 	}
