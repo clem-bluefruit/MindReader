@@ -42,7 +42,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectPath)MindReader;$(ProjectPath)gtest-1.7.0\include;$(ProjectPath)gtest-1.7.0;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)MindReader;$(SolutionDir)gtest-1.7.0\include;$(SolutionDir)gtest-1.7.0;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -88,7 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gtest\gtest.vcxproj">
-      <Project>{236683dc-ed05-4e6d-90a8-1a67ec0ddb3c}</Project>
+      <Project>{ed1b1f47-0cd2-4433-afae-289efe3b9e26}</Project>
     </ProjectReference>
     <ProjectReference Include="..\MindReader\MindReader.vcxproj">
       <Project>{8ab6d1ae-beae-4f21-8274-e6d3a0f1471d}</Project>

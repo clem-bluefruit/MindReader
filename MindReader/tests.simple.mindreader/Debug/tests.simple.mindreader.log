@@ -1,11 +1,15 @@
-﻿Build started 04/05/2015 16:19:06.
-     1>Project "C:\Users\Simon\Documents\Repo\MindReader\MindReader\tests.simple.mindreader\tests.simple.mindreader.vcxproj" on node 2 (Build target(s)).
+﻿Build started 08/05/2015 21:20:15.
+     1>Project "C:\Users\Simon\Documents\Repo\MindReader\MindReader\tests.simple.mindreader\tests.simple.mindreader.vcxproj" on node 3 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt mindreader.simple.tests.cpp
          mindreader.simple.tests.cpp
-     1>c:\users\simon\documents\repo\mindreader\mindreader\tests.simple.mindreader\mindreader.simple.tests.cpp(1): fatal error C1083: Cannot open include file: 'gtest\gtest.h': No such file or directory
-     1>Done Building Project "C:\Users\Simon\Documents\Repo\MindReader\MindReader\tests.simple.mindreader\tests.simple.mindreader.vcxproj" (Build target(s)) -- FAILED.
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Simon\Documents\Repo\MindReader\MindReader\Debug\mindreader.simple.tests.exe" /INCREMENTAL /NOLOGO C:\Users\Simon\Documents\Repo\MindReader\MindReader\\Debug\MindReader.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Simon\Documents\Repo\MindReader\MindReader\Debug\mindreader.simple.tests.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Simon\Documents\Repo\MindReader\MindReader\Debug\mindreader.simple.tests.lib" /MACHINE:X86 Debug\mindreader.simple.tests.obj
+         C:\Users\Simon\Documents\Repo\MindReader\MindReader\Debug\gtest.lib
+         C:\Users\Simon\Documents\Repo\MindReader\MindReader\Debug\MindReader.lib
+         tests.simple.mindreader.vcxproj -> C:\Users\Simon\Documents\Repo\MindReader\MindReader\Debug\mindreader.simple.tests.exe
+     1>Done Building Project "C:\Users\Simon\Documents\Repo\MindReader\MindReader\tests.simple.mindreader\tests.simple.mindreader.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:00.11
+Time Elapsed 00:00:01.31

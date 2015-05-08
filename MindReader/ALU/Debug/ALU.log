@@ -1,11 +1,14 @@
-﻿Build started 04/05/2015 16:19:06.
-     1>Project "C:\Users\Simon\Documents\Repo\MindReader\MindReader\ALU\ALU.vcxproj" on node 3 (Build target(s)).
+﻿Build started 08/05/2015 21:20:14.
+     1>Project "C:\Users\Simon\Documents\Repo\MindReader\MindReader\ALU\ALU.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ParserALU.cpp
          ParserALU.cpp
-     1>c:\users\simon\documents\repo\mindreader\mindreader\alu\parseralu.h(2): fatal error C1083: Cannot open include file: 'MindReader.h': No such file or directory
-     1>Done Building Project "C:\Users\Simon\Documents\Repo\MindReader\MindReader\ALU\ALU.vcxproj" (Build target(s)) -- FAILED.
+     1>c:\users\simon\documents\repo\mindreader\mindreader\alu\parseralu.cpp(126): warning C4018: '<' : signed/unsigned mismatch
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\Simon\Documents\Repo\MindReader\MindReader\Debug\ParserALU.lib" /NOLOGO Debug\ParserALU.obj
+         ALU.vcxproj -> C:\Users\Simon\Documents\Repo\MindReader\MindReader\Debug\ParserALU.lib
+     1>Done Building Project "C:\Users\Simon\Documents\Repo\MindReader\MindReader\ALU\ALU.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:00.13
+Time Elapsed 00:00:00.64
