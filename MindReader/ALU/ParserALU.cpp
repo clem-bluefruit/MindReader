@@ -60,8 +60,10 @@ string ParserALU::ParseString(const string &codeString, unsigned int cell = 0)
 			break;
 		case '[':
 			AddStartPoint(i + 1);
-			m_loopTimes.push_back(ViewTapeCell(cellPointer) - 1);
-
+			if (m_loopTimes.size() > 1)
+				m_loopTimes.push_back(ViewTapeCell(cellPointer));
+			else
+				m_loopTimes.push_back(ViewTapeCell(cellPointer) - 1);
 			break;
 		case ']':
 			AddEndPoint(i);
