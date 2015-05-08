@@ -40,8 +40,13 @@ string ParserALU::ParseString(const string &codeString, unsigned int cell = 0)
 	int i = 0;
 	int loopLength = 0;
 
+	string tabs = "";
+	for (int i = 0; i <= m_loopTo.size(); i++)
+		tabs += "   ";
+
 	for (const auto &c : codeString)
 	{
+		m_bufferOutput << tabs << "[" << cellPointer << "][" << m_tape.ViewCell(cellPointer) << "] " << c << endl;
 		switch (c)
 		{
 		case '+':
@@ -118,15 +123,21 @@ const unsigned int ParserALU::CurrentLoopTimes() const
 void ParserALU::CleanLoopPoints()
 {
 	m_loopFrom.pop_back();
+	m_loopFrom.shrink_to_fit();
 	m_loopTo.pop_back();
+	m_loopTo.shrink_to_fit();
 	m_loopTimes.pop_back();
+	m_loopTimes.shrink_to_fit();
 }
 
 string ParserALU::ParseLoop(const std::string &codeLoop, const unsigned int cell)
 {
 	string toTape = "";
 	unsigned int loops = 0;
-	m_bufferOutput << "Code:: " << codeLoop << " * " << cell << endl;
+	string tabs = "";
+	for (int i = 0; i < m_loopTo.size(); i++)
+		tabs += "   ";
+	m_bufferOutput << tabs << "Code:: " << codeLoop << " * " << cell << endl;
 	loops = CurrentLoopTimes();
 	for (int i = 0; i < loops; ++i)
 	{
