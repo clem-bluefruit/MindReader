@@ -126,7 +126,7 @@ string ParserALU::ParseLoop(const std::string &codeLoop, const unsigned int cell
 {
 	string toTape = "";
 	unsigned int loops = 0;
-	m_bufferOutput << "Code:: " << codeLoop << endl;
+	m_bufferOutput << "Code:: " << codeLoop << " * " << cell << endl;
 	loops = CurrentLoopTimes();
 	for (int i = 0; i < loops; ++i)
 	{
