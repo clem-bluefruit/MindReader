@@ -1,4 +1,5 @@
 #include <gtest\gtest.h>
+
 #include <MindReader.h>
 #include <ParserALU.h>
 #include <string>
@@ -76,9 +77,25 @@ TEST(ParserALU, Nested_loops_example_Hello_World)
 	std::string expectedString = "Hello World!";
 	MindReader tape(inputString);
 	ParserALU alu(tape);
-	//ASSERT_EQ(expectedString, alu.ParseString()) << "Output is NOT 'Hello World!'";
-	alu.ParseString();
-	std::string buffer = alu.ShowBuffer();
-	std::cout << "Buffer: " << std::endl;
-	std::cout << buffer << std::endl;
+	ASSERT_EQ(expectedString, alu.ParseString()) << "Output is NOT 'Hello World!'";
 }
+/*
+TEST(ParserALU, Fibonacci_sequence_up_to_100)
+{
+std::string input = "+++++++++++"
+">+>> >> ++++++++++++++++++++++++++++++++++++++++++++"
+"> ++++++++++++++++++++++++++++++++ << << << [> [>> >> >> +> "
+"+ << << << <-] >> >> >> >[<< << << <+>> >> >> >-]<[>++++++++++[-"
+"<-[>> +>+<< <-] >> >[<< <+>> >-] + <[>[-]<[-]]>[<< [>> > +<< <"
+"- ] >> [-]] << ] >> >[>> +> +<< <-] >> >[<< <+>> >-] + <[>[-]<[-]]"
+">[<< +>> [-]] << << << <] >> >> >[++++++++++++++++++++++++ + "
+"++++++++++++++++++++++ + .[-]]++++++++++<[-> - <]>++++"
+"++++++++++++++++++++++++++++++++++++++++++++.[-] << "
+"<< << << << << [>> >+> +<< << -] >> >> [<< << +>> >> -]<-[>> .>. << <"
+"[-]] << [>> +>+<< <-] >> >[<< <+>> >-] << [<+>-] > [<+>-] << < -]";
+std::string expected = "1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89";
+MindReader tape(input);
+ParserALU alu(tape);
+ASSERT_EQ(expected, alu.ParseString()) << "Output is not '" << expected << "'";
+}
+*/
