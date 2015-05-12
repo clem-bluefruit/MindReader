@@ -59,12 +59,13 @@ string ParserALU::ParseString(const string &codeString, unsigned int cell = 0)
 			cellPointer--;
 			break;
 		case '.':
-			tapeString += ViewTapeCell(cellPointer);
+			if (ViewTapeCell(cellPointer) != '\0')
+				tapeString += ViewTapeCell(cellPointer);
 			break;
 		case '[':
 			++m_loopDepth;
 			AddStartPoint(i + 1);
-			m_loopTimes.push_back(ViewTapeCell(cellPointer));
+			m_loopTimes.push_back(ViewTapeCell(cellPointer) - 1);
 			break;
 		case ']':
 			--m_loopDepth;

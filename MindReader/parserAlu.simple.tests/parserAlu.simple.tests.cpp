@@ -71,6 +71,15 @@ TEST(ParserALU, Code_input_contains_loop_points_returns_brainfuck)
 	ASSERT_EQ(expected, alu.ParseString()) << "Output is NOT brainfuck";
 }
 
+TEST(ParserALU, Basic_nested_loops_output_is_2)
+{
+	std::string inputString = "++[>+++++[>+++++<-]<-].>.>.";
+	std::string expected = "2";
+	MindReader tape(inputString);
+	ParserALU alu(tape);
+	ASSERT_EQ(expected, alu.ParseString()) << "Output is NOT 2";
+}
+
 TEST(ParserALU, Nested_loops_example_Hello_World)
 {
 	std::string inputString = "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.";
