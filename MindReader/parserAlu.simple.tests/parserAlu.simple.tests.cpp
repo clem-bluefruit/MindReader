@@ -79,7 +79,7 @@ TEST(ParserALU, Basic_nested_loops_output_is_2)
 	ParserALU alu(tape);
 	ASSERT_EQ(expected, alu.ParseString()) << "Output is NOT 2";
 }
-
+/*
 TEST(ParserALU, Triple_depth_nested_loops_output_is_comma)
 {
 	std::string inputString = "++[>+++++[>+++++[>++++++<-]<-]<-].>.>.>.";
