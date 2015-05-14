@@ -37,19 +37,15 @@ string ParserALU::ParseString(const string &codeString, unsigned int cell = 0)
 	int i = 0;
 	int loopLength = 0;
 
-	string tabs = "";
-	for (int i = 0; i <= m_loopTo.size(); i++)
-		tabs += "   ";
-
 	for (const auto &c : codeString)
 	{
 		switch (c)
 		{
 		case '+':
-			m_tape.IncrementCell(cellPointer);
+			m_tape.IncrementCell();
 			break;
 		case '-':
-			m_tape.DecrementCell(cellPointer);
+			m_tape.DecrementCell();
 			break;
 		case '>':
 			m_tape.AddCell();

@@ -11,8 +11,8 @@ public:
 	~MindReader();
 	unsigned int GetSize() const;
 	void AddCell();
-	void IncrementCell(int cellID);
-	void DecrementCell(int cellID);
+	void IncrementCell();
+	void DecrementCell();
 	char ViewCell(int cellID) const;
 	void InputCode(std::string code);
 	std::string ViewCode() const;
@@ -20,4 +20,5 @@ public:
 private:
 	std::vector<unsigned char> m_tape;
 	std::string m_bfCode;
+	std::vector<unsigned char>::iterator m_currentCell;
 };

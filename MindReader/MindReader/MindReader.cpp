@@ -2,15 +2,17 @@
 using namespace ::std;
 
 MindReader::MindReader()
-	: m_tape(0),
-	  m_bfCode("")
+	: m_bfCode("")
 {
+	m_tape.push_back(0);
+	m_currentCell = m_tape.begin();
 }
 
 MindReader::MindReader(string code)
-	: m_tape(0),
-	m_bfCode(code)
+	: m_bfCode(code)
 {
+	m_tape.push_back(0);
+	m_currentCell = m_tape.begin();
 }
 
 MindReader::~MindReader()
@@ -27,18 +29,14 @@ void MindReader::AddCell()
 	m_tape.push_back(0);
 }
 
-void MindReader::IncrementCell(int cellID)
+void MindReader::IncrementCell()
 {
-	int cellvalue = ViewCell(cellID);
-	cellvalue++;
-	m_tape.at(cellID) = cellvalue;
+	(*m_currentCell)++;
 }
 
-void MindReader::DecrementCell(int cellID)
+void MindReader::DecrementCell()
 {
-	int cellvalue = ViewCell(cellID);
-	cellvalue--;
-	m_tape.at(cellID) = cellvalue;
+	(*m_currentCell)--;
 }
 
 char MindReader::ViewCell(int cellID = 0) const

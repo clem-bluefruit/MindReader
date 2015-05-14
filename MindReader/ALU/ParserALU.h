@@ -28,4 +28,5 @@ private:
 	std::string ParseLoop(const std::string &codeString, const unsigned int cell);
 	const unsigned char ViewTapeCell(const unsigned int cell);
 	unsigned int m_loopDepth;
+	unsigned char *m_currentCell;
 };

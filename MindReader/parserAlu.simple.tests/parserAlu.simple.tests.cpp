@@ -89,6 +89,15 @@ TEST(ParserALU, Triple_depth_nested_loops_output_is_comma)
 	ASSERT_EQ(expected, alu.ParseString()) << "Output is NOT ,";
 }
 
+TEST(ParserALU, Messing_around_example)
+{
+	std::string inputCode = "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->+[<]<-]>>.>.>.";
+	std::string expected = "HhX";
+	MindReader tape(inputCode);
+	ParserALU alu(tape);
+	ASSERT_EQ(expected, alu.ParseString());
+}
+
 TEST(ParserALU, Nested_loops_example_Hello_World)
 {
 	std::string inputString = "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.";
