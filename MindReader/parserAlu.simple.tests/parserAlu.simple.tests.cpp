@@ -13,7 +13,7 @@ TEST(ParserALU, Initialise_ALU_from_initialised_MindReader)
 	ASSERT_EQ(4, alu.CodeLength()) << "Tape value is INCORRECT";
 }
 
-TEST(ParserALU, Basic_code_string_gives_output_of_tab_char)
+TEST(ParserALU, Basic_code_string_gives_output_of_tab_char_on_construction)
 {
 	std::string inputString = "+++++ ++++.";
 	std::string expected    = "\t";
@@ -41,7 +41,7 @@ TEST(ParserALU, Basic_code_input_add_subtract_output_tab)
 	ASSERT_EQ("\t", alu.ParseString()) << "Parser output is NOT a tab char";
 }
 
-TEST(ParserALU, Basic_code_enters_value_of_9_to_Cell_0_and_10_to_Cell_1)
+TEST(ParserALU, Basic_code_iterates_two_cells_appending_values)
 {
 	std::string inputString = "+++++ ++++"
 							  ">+++++ +++++<.>.";
@@ -50,7 +50,7 @@ TEST(ParserALU, Basic_code_enters_value_of_9_to_Cell_0_and_10_to_Cell_1)
 	ParserALU alu(tape);
 	ASSERT_EQ(expected, alu.ParseString()) << "Output is NOT \t\n";
 }
-
+/*
 TEST(ParserALU, Code_input_contains_loop_points_totals_97_returns_a)
 {
 	std::string inputString = "+++++ +++++"
@@ -61,7 +61,7 @@ TEST(ParserALU, Code_input_contains_loop_points_totals_97_returns_a)
 	ParserALU alu(tape);
 	ASSERT_EQ(expected, alu.ParseString()) << "Output is NOT a";
 }
-
+/*
 TEST(ParserALU, Code_input_contains_loop_points_returns_brainfuck)
 {
 	std::string inputString = "++++[>+++++<-]>[>+++++>++++++>+++++>+++++>+++++>+++++>++++++>+++++>+++++<<<<<<<<<-]>--.>------.>---.>+++++.>++++++++++.>++.>---.>-.>+++++++.";
@@ -70,7 +70,7 @@ TEST(ParserALU, Code_input_contains_loop_points_returns_brainfuck)
 	ParserALU alu(tape);
 	ASSERT_EQ(expected, alu.ParseString()) << "Output is NOT brainfuck";
 }
-
+/*
 TEST(ParserALU, Basic_nested_loops_output_is_2)
 {
 	std::string inputString = "++[>+++++[>+++++<-]<-].>.>.";

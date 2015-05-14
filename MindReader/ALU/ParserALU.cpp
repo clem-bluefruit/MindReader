@@ -5,11 +5,10 @@
 using namespace ::std;
 
 ParserALU::ParserALU(MindReader &tape)
-	: m_tape(tape),
-	  m_loopFrom(0),
-	  m_loopTo(0),
-	  m_loopTimes(0)
-{}
+	: m_tape(tape)
+{
+	m_cellPointer.push(0);
+}
 
 ParserALU::~ParserALU()
 {}
@@ -21,38 +20,34 @@ const unsigned int ParserALU::CodeLength() const
 
 string ParserALU::ParseString()
 {
-	return ParseString(m_tape.ViewCode(), 0);
+	return ParseString(m_tape.ViewCode());
 }
 
-string ParserALU::ParseString(const string &codeString, unsigned int cell = 0)
+string ParserALU::ParseString(const string &codeString)
 {
 	if (m_tape.GetSize() == 0)
 		m_tape.AddCell();
-	unsigned int cellPointer = cell;
-	
 	string tapeString = "";
-	string loopCode = "";
-
-	int i = 0;
-
+	unsigned int i = 0;
 	for (const auto &c : codeString)
 	{
-		ProcessChar(c, tapeString, cellPointer, i);
+		ProcessChar(c, tapeString, i);
 		i++;
 	}
 	return tapeString;
 }
 
-void ParserALU::ProcessChar(char codeChar, string &tapeString, unsigned int &cellPointer, unsigned int i)
+void ParserALU::ProcessChar(const char &codeChar, string &tapeString, unsigned int i)
 {
 	int loopLength = 0;
+	unsigned int cellPointer = m_cellPointer.top();
 	switch (codeChar)
 	{
 	case '+':
-		m_tape.IncrementCell(cellPointer);
+		m_tape.IncrementCell(m_cellPointer.top());
 		break;
 	case '-':
-		m_tape.DecrementCell(cellPointer);
+		m_tape.DecrementCell(m_cellPointer.top());
 		break;
 	case '>':
 		m_tape.AddCell();
@@ -62,18 +57,18 @@ void ParserALU::ProcessChar(char codeChar, string &tapeString, unsigned int &cel
 		cellPointer--;
 		break;
 	case '.':
-		if (ViewTapeCell(cellPointer) != '\0')
-			tapeString += ViewTapeCell(cellPointer);
+		if (ViewTapeCell(m_cellPointer.top()) != '\0')
+			tapeString += ViewTapeCell(m_cellPointer.top());
 		break;
 	case '[':
 		AddStartPoint(i + 1);
-		m_loopTimes.push_back(ViewTapeCell(cellPointer) - 1);
+		m_loopTimes.push(ViewTapeCell(cellPointer) - 1);
 		break;
 	case ']':
 		AddEndPoint(i);
 		loopLength = (CurrentEndPoint() - CurrentStartPoint());
-		loopCode = m_tape.ViewCode().substr(CurrentStartPoint(), loopLength);
-		tapeString += ParseLoop(loopCode, cellPointer);
+		m_loopCode.push(m_tape.ViewCode().substr(CurrentStartPoint(), loopLength));
+		tapeString += ParseLoop();
 		break;
 	default:
 		break;
@@ -82,45 +77,44 @@ void ParserALU::ProcessChar(char codeChar, string &tapeString, unsigned int &cel
 
 void ParserALU::AddStartPoint(const unsigned int start)
 {
-	m_loopFrom.push_back(start);
+	m_loopFrom.push(start);
 }
 
 void ParserALU::AddEndPoint(const unsigned int end)
 {
-	m_loopTo.push_back(end);
+	m_loopTo.push(end);
 }
 
 const unsigned int ParserALU::CurrentStartPoint() const
 {
-	return m_loopFrom.back();
+	return m_loopFrom.top();
 }
 
 const unsigned int ParserALU::CurrentEndPoint() const
 {
-	return m_loopTo.back();
+	return m_loopTo.top();
 }
 
 const unsigned int ParserALU::CurrentLoopTimes() const
 {
-	return m_loopTimes.back();
+	return m_loopTimes.top();
 }
 
 void ParserALU::CleanLoopPoints()
 {
-	m_loopFrom.pop_back();
-	m_loopFrom.shrink_to_fit();
-	m_loopTo.pop_back();
-	m_loopTo.shrink_to_fit();
-	m_loopTimes.pop_back();
-	m_loopTimes.shrink_to_fit();
+	m_loopFrom.pop();
+	m_loopTo.pop();
+	m_loopTimes.pop();
+	m_loopCode.pop();
+	m_cellPointer.pop();
 }
 
-string ParserALU::ParseLoop(const std::string &codeLoop, const unsigned int cell)
+string ParserALU::ParseLoop()
 {
 	string toTape = "";
 	for (int i = 0; i < CurrentLoopTimes(); ++i)
 	{
-		toTape += ParseString(codeLoop, cell);
+		toTape += ParseString(m_loopCode.top());
 	}
 	CleanLoopPoints();
 	return toTape;
