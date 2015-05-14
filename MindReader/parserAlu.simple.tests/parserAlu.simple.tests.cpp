@@ -6,33 +6,26 @@
 #include <iostream>
 using namespace ::testing;
 
-TEST(ParserALU, Initialise_ALU_from_initialised_MindReader)
-{
-	MindReader tape("+++.");
-	ParserALU alu(tape);
-	ASSERT_EQ(4, alu.CodeLength()) << "Tape value is INCORRECT";
-}
-
-TEST(ParserALU, Basic_code_string_gives_output_of_tab_char)
+TEST(ParserALU, Basic_code_input_on_constructor_output_is_tab_char)
 {
 	std::string inputString = "+++++ ++++.";
 	std::string expected    = "\t";
 	MindReader tape(inputString);
 	ParserALU alu(tape);
-	ASSERT_EQ(expected, alu.ParseString()) << "Parser output is NOT tab char";
+	ASSERT_EQ(expected, alu.ParseString()) << "Parser with constructr, output is NOT tab char";
 }
 
-TEST(ParserALU, Basic_code_input_after_initialise)
+TEST(ParserALU, Basic_code_input_after_constructor_output_is_tab_char)
 {
 	std::string inputString = "+++++ ++++.";
 	std::string expected    = "\t";
 	MindReader tape;
 	ParserALU alu(tape);
 	tape.InputCode(inputString);
-	ASSERT_EQ(expected, alu.ParseString());
+	ASSERT_EQ(expected, alu.ParseString()) << "Parser without constructor, output is NOT tab char";
 }
 
-TEST(ParserALU, Basic_code_input_add_subtract_output_tab)
+TEST(ParserALU, Basic_code_input_10_minus_1_output_is_tab_char)
 {
 	std::string inputString = "+++++ +++++-.";
 	std::string expected    = "\t";
@@ -40,8 +33,8 @@ TEST(ParserALU, Basic_code_input_add_subtract_output_tab)
 	ParserALU alu(tape);
 	ASSERT_EQ("\t", alu.ParseString()) << "Parser output is NOT a tab char";
 }
-
-TEST(ParserALU, Basic_code_enters_value_of_9_to_Cell_0_and_10_to_Cell_1)
+/*
+TEST(ParserALU, Basic_code_iterate_two_cells_append_values_to_both)
 {
 	std::string inputString = "+++++ ++++"
 							  ">+++++ +++++<.>.";

@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <stack>
 
 class ParserALU
 {
@@ -15,9 +16,10 @@ public:
 	unsigned int NumOperations() const;
 private:
 	MindReader &m_tape;
-	std::vector<unsigned int> m_loopFrom;
+	std::stack<unsigned int> m_loopFrom;
 	std::vector<unsigned int> m_loopTo;
 	std::vector<unsigned int> m_loopTimes;
+	std::vector<unsigned int> m_cell;
 	std::string loopCode;
 	void AddStartPoint(const unsigned int start);
 	void AddEndPoint(const unsigned int end);
