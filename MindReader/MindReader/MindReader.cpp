@@ -5,13 +5,17 @@ MindReader::MindReader()
 	: m_tape(0),
 	  m_bfCode(""),
 	  m_cellIndex(0)
-{}
+{
+	AddCell();
+}
 
 MindReader::MindReader(string code)
 	: m_tape(0),
 	  m_bfCode(code),
 	  m_cellIndex(0)
-{}
+{
+	AddCell();
+}
 
 MindReader::~MindReader()
 {}

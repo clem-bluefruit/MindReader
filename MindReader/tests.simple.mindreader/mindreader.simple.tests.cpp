@@ -3,16 +3,16 @@
 #include <string>
 using namespace ::testing;
 
-TEST(MindReader, Initialise_empty_tape)
+TEST(MindReader, Initialised_tape_has_1_ZERO_value_cell)
 {
 	MindReader tape;
-	ASSERT_EQ(0, tape.GetSize()) << "Tape is NOT empty";
+	ASSERT_EQ(1, tape.GetSize()) << "Tape is NOT empty";
 }
 
-TEST(MindReader, Adding_cells_to_tape)
+TEST(MindReader, Adding_4_empty_cells_to_tape_gives_5_total)
 {
 	MindReader tape;
-	for (int i = 0; i < 5; ++i)
+	for (int i = 0; i < 4; ++i)
 	{
 		tape.AddCell();
 	}
