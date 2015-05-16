@@ -18,6 +18,7 @@ private:
 	std::stack<unsigned int> m_loopFrom;
 	std::stack<unsigned int> m_loopTo;
 	std::stack<unsigned int> m_loopTimes;
+	std::stack<unsigned int> m_continueFrom;
 	void AddStartPoint(const unsigned int start);
 	void AddEndPoint(const unsigned int end);
 	void CleanLoopPoints();
@@ -26,5 +27,5 @@ private:
 	const unsigned int CurrentLoopTimes() const;
 	std::string ParseLoop(const std::string &codeString);
 	std::string GetLoop(std::string codeString);
-	const unsigned char ViewTapeCell(const unsigned int cell);
+	const unsigned char ViewTapeCell(const unsigned int cell) const;
 };

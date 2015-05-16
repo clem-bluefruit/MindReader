@@ -2,7 +2,7 @@
 #include <MindReader.h>
 #include <string>
 using namespace ::testing;
-
+/*
 TEST(MindReader, Initialised_tape_has_1_ZERO_value_cell)
 {
 	MindReader tape;
@@ -42,3 +42,4 @@ TEST(MindReader, Initialised_value_is_overwritten)
 	tape.InputCode(expected);
 	ASSERT_EQ(expected, tape.ViewCode()) << "Code string is NOT -";
 }
+*/

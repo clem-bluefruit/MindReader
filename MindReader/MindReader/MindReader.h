@@ -9,14 +9,14 @@ public:
 	MindReader();
 	MindReader(std::string code);
 	~MindReader();
-	unsigned int GetSize() const;
+	const unsigned int GetSize() const;
 	void AddCell();
 	void IncrementCell();
 	void DecrementCell();
-	char ViewCell(int cellID) const;
+	const char ViewCell(const unsigned int cellID) const;
 	void InputCode(std::string code);
-	std::string ViewCode() const;
-	std::string OutputString() const;
+	const std::string ViewCode() const;
+	const std::string OutputString() const;
 	unsigned int m_cellIndex;
 private:
 	std::vector<unsigned char> m_tape;

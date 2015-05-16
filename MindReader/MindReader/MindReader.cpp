@@ -20,7 +20,7 @@ MindReader::MindReader(string code)
 MindReader::~MindReader()
 {}
 
-unsigned int MindReader::GetSize() const
+const unsigned int MindReader::GetSize() const
 {
 	return m_tape.size();
 }
@@ -40,7 +40,7 @@ void MindReader::DecrementCell()
 	m_tape.at(m_cellIndex) -= 1;
 }
 
-char MindReader::ViewCell(int cellID = 0) const
+const char MindReader::ViewCell(const unsigned int cellID = 0) const
 {
 	return m_tape.at(cellID);
 }
@@ -50,12 +50,12 @@ void MindReader::InputCode(string bfCode)
 	m_bfCode = bfCode;
 }
 
-string MindReader::ViewCode() const
+const string MindReader::ViewCode() const
 {
 	return m_bfCode;
 }
 
-string MindReader::OutputString() const
+const string MindReader::OutputString() const
 {
 	string appendChars = "";
 	for (const char c : m_tape)

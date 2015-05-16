@@ -5,7 +5,7 @@
 #include <string>
 #include <iostream>
 using namespace ::testing;
-
+/*
 TEST(ParserALU, Basic_code_input_on_constructor_output_is_tab_char)
 {
 	std::string inputString = "+++++ ++++.";
@@ -81,7 +81,7 @@ TEST(ParserALU, Nested_loops_three_deep_with_char_rollover_output_is_q)
 	ParserALU alu(tape);
 	ASSERT_EQ(expected, alu.ParseString()) << "Output is NOT 'q'";
 }
-
+*/
 
 TEST(ParserALU, Nested_loops_example_Hello_World)
 {

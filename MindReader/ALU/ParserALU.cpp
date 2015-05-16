@@ -24,13 +24,8 @@ string ParserALU::ParseString()
 string ParserALU::ParseString(const string &codeString)
 {
 	unsigned int &cellIndex = m_tape.m_cellIndex;
-	
 	string tapeString = "";
-	string loopCode = "";
-
 	int i = 0;
-	int loopLength = 0;
-
 	for (const auto &c : codeString)
 	{
 		switch (c)
@@ -90,7 +85,7 @@ const unsigned int ParserALU::CurrentEndPoint() const
 
 const unsigned int ParserALU::CurrentLoopTimes() const
 {
-	return (m_loopTimes.top()) - 1; // Subtract 1 as ran once already
+	return (m_loopTimes.top()) - 1;		// Subtract 1 as ran once already
 }
 
 void ParserALU::CleanLoopPoints()
@@ -126,7 +121,7 @@ string ParserALU::GetLoop(string codeString)
 	return codeString.substr(CurrentStartPoint(), loopLength);
 }
 
-const unsigned char ParserALU::ViewTapeCell(const unsigned int cell)
+const unsigned char ParserALU::ViewTapeCell(const unsigned int cell = 0) const
 {
 	return m_tape.ViewCell(cell);
 }
