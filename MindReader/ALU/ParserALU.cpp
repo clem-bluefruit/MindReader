@@ -105,9 +105,9 @@ string ParserALU::ParseLoop(const std::string &codeLoop)
 		}
 		return "";
 	}
-	
 	string toTape = "";
-	for (int i = 0; i < CurrentLoopTimes(); ++i)
+	const unsigned int loopTimes = CurrentLoopTimes();
+	for (int i = 0; i < loopTimes; ++i)
 	{
 		toTape += ParseString(codeLoop);
 	}
