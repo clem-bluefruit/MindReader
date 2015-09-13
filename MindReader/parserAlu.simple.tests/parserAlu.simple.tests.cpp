@@ -1,5 +1,4 @@
 #include <gtest\gtest.h>
-
 #include <MindReader.h>
 #include <ParserALU.h>
 #include <string>
