@@ -9,11 +9,8 @@ ParserALU::ParserALU(MindReader &tape)
 	  m_loopFrom(0),
 	  m_loopTo(0),
 	  m_loopTimes(0),
-	  m_operations(0),
-	  m_timesLooped(0)
-{
-	m_bufferOutput.clear();
-}
+	  m_loopDepth(0)
+{}
 
 ParserALU::~ParserALU()
 {}
@@ -40,6 +37,10 @@ string ParserALU::ParseString(const string &codeString, unsigned int cell = 0)
 	int i = 0;
 	int loopLength = 0;
 
+	string tabs = "";
+	for (int i = 0; i <= m_loopTo.size(); i++)
+		tabs += "   ";
+
 	for (const auto &c : codeString)
 	{
 		switch (c)
@@ -58,14 +59,16 @@ string ParserALU::ParseString(const string &codeString, unsigned int cell = 0)
 			cellPointer--;
 			break;
 		case '.':
-			tapeString += ViewTapeCell(cellPointer);
+			if (ViewTapeCell(cellPointer) != '\0')
+				tapeString += ViewTapeCell(cellPointer);
 			break;
 		case '[':
-			++m_timesLooped;
+			++m_loopDepth;
 			AddStartPoint(i + 1);
 			m_loopTimes.push_back(ViewTapeCell(cellPointer) - 1);
 			break;
 		case ']':
+			--m_loopDepth;
 			AddEndPoint(i);
 			loopLength = (CurrentEndPoint() - CurrentStartPoint());
 			loopCode = codeString.substr(CurrentStartPoint(), loopLength);
@@ -75,19 +78,8 @@ string ParserALU::ParseString(const string &codeString, unsigned int cell = 0)
 			break;
 		}
 		i++;
-		AddOp();
 	}
 	return tapeString;
-}
-
-unsigned int ParserALU::NumOperations() const
-{
-	return m_operations;
-}
-
-void ParserALU::AddOp()
-{
-	m_operations = m_operations + 1;
 }
 
 void ParserALU::AddStartPoint(const unsigned int start)
@@ -118,17 +110,21 @@ const unsigned int ParserALU::CurrentLoopTimes() const
 void ParserALU::CleanLoopPoints()
 {
 	m_loopFrom.pop_back();
+	m_loopFrom.shrink_to_fit();
 	m_loopTo.pop_back();
+	m_loopTo.shrink_to_fit();
 	m_loopTimes.pop_back();
+	m_loopTimes.shrink_to_fit();
 }
 
 string ParserALU::ParseLoop(const std::string &codeLoop, const unsigned int cell)
 {
 	string toTape = "";
-	unsigned int loops = 0;
-	m_bufferOutput << "Code:: " << codeLoop << endl;
-	loops = CurrentLoopTimes();
-	for (int i = 0; i < loops; ++i)
+	string tabs = "";
+	for (int i = 0; i < m_loopTo.size(); i++)
+		tabs += "   ";
+
+	for (int i = 0; i < CurrentLoopTimes(); ++i)
 	{
 		toTape += ParseString(codeLoop, cell);
 	}
