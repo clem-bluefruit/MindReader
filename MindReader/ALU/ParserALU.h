@@ -12,9 +12,9 @@ public:
 	const unsigned int CodeLength() const;
 	std::string ParseString();
 	std::string ParseString(const std::string &codeString, unsigned int cell);
-	unsigned int NumOperations() const;
 private:
 	MindReader &m_tape;
+	void ProcessChar(char codeChar, std::string &tapeString, unsigned int &cellPointer, unsigned int i);
 	std::vector<unsigned int> m_loopFrom;
 	std::vector<unsigned int> m_loopTo;
 	std::vector<unsigned int> m_loopTimes;
@@ -27,5 +27,4 @@ private:
 	const unsigned int CurrentLoopTimes() const;
 	std::string ParseLoop(const std::string &codeString, const unsigned int cell);
 	const unsigned char ViewTapeCell(const unsigned int cell);
-	unsigned int m_loopDepth;
 };
